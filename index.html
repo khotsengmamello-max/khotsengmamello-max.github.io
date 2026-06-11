@@ -770,6 +770,103 @@
         }
         .blog-link:hover { gap: 0.5rem; }
 
+        .read-more-btn {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            padding: 0;
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s ease;
+        }
+
+        .read-more-btn:hover { gap: 0.5rem; }
+
+        .story-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .story-modal.show { display: flex; }
+
+        .story-modal-content {
+            width: min(760px, 100%);
+            max-height: 85vh;
+            overflow-y: auto;
+            background: var(--bg2);
+            border: 1px solid var(--gold-border);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.55);
+            position: relative;
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            background: var(--card);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+        }
+
+        .modal-close:hover {
+            color: var(--gold);
+            border-color: var(--gold-border);
+        }
+
+        .modal-year {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .modal-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.4rem;
+            line-height: 1.35;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-body {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .modal-body p { margin-bottom: 1rem; }
+
+        @media (max-width: 600px) {
+            .story-modal-content { padding: 1.4rem; }
+            .modal-title { font-size: 1.15rem; }
+            .modal-body { font-size: 0.9rem; }
+        }
+
         /* ── REFERENCES ── */
         .refs-grid {
             display: grid;
@@ -939,7 +1036,7 @@
         <li><a href="#leadership">Leadership</a></li>
         <li><a href="#awards">Awards</a></li>
         <li><a href="#interests">Interests</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="#blog">My Story</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 </nav>
@@ -1238,30 +1335,42 @@
 
 <hr class="section-divider">
 
-<!-- BLOG -->
+<!-- MY STORY -->
 <section id="blog" class="section">
     <h2 class="section-heading"><span class="icon"><i class="fas fa-book-open"></i></span> <span class="accent">My Story</span></h2>
     <div class="blog-grid">
         <div class="blog-card">
-            <div class="blog-year">2025</div>
-            <div class="blog-title">My Journey as a GradStar Top 100 — Twice</div>
-            <div class="blog-excerpt">Reflections on being recognised among South Africa's most employable graduates and what it means for my career in data science.</div>
-            <a href="#" class="blog-link">Read more →</a>
-        </div>
-        <div class="blog-card">
-            <div class="blog-year">2026</div>
-            <div class="blog-title">Building Predictive Models for Water Quality</div>
-            <div class="blog-excerpt">A deep dive into the UCLL international project where I built a predictive analytics dashboard using Python and React.</div>
-            <a href="#" class="blog-link">Read more →</a>
-        </div>
-        <div class="blog-card">
             <div class="blog-year">2024</div>
             <div class="blog-title">From Tembisa to Tech: My Path into Data Science</div>
-            <div class="blog-excerpt">How growing up in Tembisa, earning 6 matric distinctions, and a full NTT Data scholarship shaped my passion for technology.</div>
-            <a href="#" class="blog-link">Read more →</a>
+            <div class="blog-excerpt">Growing up in Tembisa taught me that my background does not have to define my future. After passing matric with six distinctions and being the top-performing learner at my school, I began a journey that led me from an underdeveloped community to Business Intelligence and Data Science.</div>
+            <button class="read-more-btn" type="button" data-story="tembisa">Read more →</button>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-year">2025</div>
+            <div class="blog-title">My Journey as a GradStar Top 100 — Twice</div>
+            <div class="blog-excerpt">My GradStar journey began in Grade 12 when I was selected among South Africa's top-performing learners through the GradStar Schools Programme. Two years later, I was selected again as a GradStar Top 100 university candidate.</div>
+            <button class="read-more-btn" type="button" data-story="gradstar">Read more →</button>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-year">2026</div>
+            <div class="blog-title">Representing South Africa in an International Project</div>
+            <div class="blog-excerpt">Being selected for the UCLL International Virtual Project opened my eyes to the global world of technology, collaboration, AI, and data science. It pushed me to learn beyond the classroom and explore new tools independently.</div>
+            <button class="read-more-btn" type="button" data-story="ucll">Read more →</button>
         </div>
     </div>
 </section>
+
+<!-- STORY MODAL -->
+<div class="story-modal" id="storyModal" aria-hidden="true">
+    <div class="story-modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" id="modalClose" aria-label="Close story">&times;</button>
+        <div class="modal-year" id="modalYear"></div>
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
 
 <hr class="section-divider">
 
@@ -1386,6 +1495,88 @@
             });
         });
     }
+
+    // MY STORY READ MORE MODAL
+    const stories = {
+        tembisa: {
+            year: "2024",
+            title: "From Tembisa to Tech: My Path into Data Science",
+            body: `
+                <p>Growing up in Tembisa, I learned early that your circumstances do not have to determine your future. Although I come from an underdeveloped community with many social and economic challenges, I never allowed my background to limit my ambitions. Through hard work, discipline, and determination, I completed matric with six distinctions and graduated as the top-performing learner at my school.</p>
+                <p>My original dream was to study medicine, and technology was never part of my plan. Everything changed when I was selected to attend the Dimension Data Saturday School programme, where I was first introduced to the world of technology. While medicine remained my first choice after matric, I received a bursary opportunity that supported studies in Information Technology. I decided to embrace the opportunity, believing it could lead me to something meaningful.</p>
+                <p>When I arrived at Belgium Campus iTversity, I initially thought IT was only about coding. Over time, I discovered Business Intelligence, Data Science, analytics, statistics, machine learning, and problem-solving through data. I realised that technology is not just about writing code—it is about creating solutions, uncovering insights, and making a positive impact.</p>
+                <p>Today, as a third-year Bachelor of Computing student specialising in Business Intelligence, I am proud of how far I have come. My journey from Tembisa to technology proves that where you start does not determine where you can go. With education, perseverance, and the right opportunities, it is possible to build a future beyond what once seemed possible.</p>
+            `
+        },
+        gradstar: {
+            year: "2025",
+            title: "My Journey as a GradStar Top 100 — Twice",
+            body: `
+                <p>My GradStar journey began in Grade 12 when I was selected among South Africa's top-performing learners through the GradStar Schools Programme. After attending the Top 500 event and later being recognised among the Top 100 learners, I left with unforgettable memories, valuable connections, and a renewed belief in my potential.</p>
+                <p>Two years later, in 2025, I received an email inviting me to join the GradStar community platform as a former Top 100 candidate. While exploring the platform, I noticed an opportunity to apply for the GradStar Top 100 University Students Programme. I submitted my application, completed the required assessments, recorded video submissions, and continued with my studies without expecting much.</p>
+                <p>Several months later, I received a call informing me that I had been selected among the Top 500 university students in South Africa. After completing additional evaluation activities, I was officially selected as a GradStar Top 100 Candidate.</p>
+                <p>This achievement led to an incredible leadership and networking experience where I connected with ambitious students from across the country, attended team-building activities, and stayed in a hotel for the first time in my life. Beyond the recognition itself, the experience reminded me that opportunities often come when you continue believing in yourself, even when you least expect them.</p>
+                <p>Being recognised by GradStar both as a matric learner and later as a university student remains one of the proudest milestones of my academic journey.</p>
+            `
+        },
+        ucll: {
+            year: "2026",
+            title: "Representing South Africa in an International Project",
+            body: `
+                <p>Being selected for the UCLL International Virtual Project was one of the most transformative experiences of my academic journey. Initially, I never expected to be chosen. While other students were receiving notifications about their selections, I assumed I had not made the cut. A few weeks later, I received the news that I had been selected to represent South Africa and collaborate with students from Belgium on the Harties Digital Insights project.</p>
+                <p>The project opened my eyes to a completely new world of technology, innovation, and collaboration. Working with international students exposed me to tools, frameworks, and technologies that I had never encountered before. More than 70% of the tools used during the project were new to me, including technologies such as React and modern data analytics platforms. This experience inspired me to become more curious and proactive in my learning.</p>
+                <p>I started spending evenings researching and teaching myself new technologies beyond the university curriculum. Through self-learning, I explored tools such as Tableau, R, and advanced analytics platforms, expanding my knowledge beyond what was required in class.</p>
+                <p>The project taught me that successful technology professionals never stop learning and that the best solutions often come from exploring new tools and perspectives. More importantly, it showed me that I could collaborate effectively with people from different countries and cultures, preparing me for a global career in technology and data science.</p>
+            `
+        }
+    };
+
+    const storyModal = document.getElementById("storyModal");
+    const modalClose = document.getElementById("modalClose");
+    const modalYear = document.getElementById("modalYear");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalBody = document.getElementById("modalBody");
+
+    function openStoryModal(storyKey) {
+        const story = stories[storyKey];
+        if (!story) return;
+
+        modalYear.textContent = story.year;
+        modalTitle.textContent = story.title;
+        modalBody.innerHTML = story.body;
+        storyModal.classList.add("show");
+        storyModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeStoryModal() {
+        storyModal.classList.remove("show");
+        storyModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".read-more-btn").forEach(button => {
+        button.addEventListener("click", () => openStoryModal(button.dataset.story));
+    });
+
+    if (modalClose) {
+        modalClose.addEventListener("click", closeStoryModal);
+    }
+
+    if (storyModal) {
+        storyModal.addEventListener("click", (event) => {
+            if (event.target === storyModal) {
+                closeStoryModal();
+            }
+        });
+    }
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && storyModal.classList.contains("show")) {
+            closeStoryModal();
+        }
+    });
+
 
 </script>
 </body>
