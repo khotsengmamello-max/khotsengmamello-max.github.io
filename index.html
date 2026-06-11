@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noliyolo Mamello Khotseng | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gold: #f5a623;
+            --gold-dim: #c98a1a;
+            --gold-bg: rgba(245, 166, 35, 0.12);
+            --gold-border: rgba(245, 166, 35, 0.25);
+            --bg: #0d0d0f;
+            --bg2: #13131a;
+            --bg3: #1a1a24;
+            --card: #16161e;
+            --card-border: rgba(255,255,255,0.07);
+            --text: #f0f0f0;
+            --text-muted: #8a8a9a;
+            --text-dim: #c0c0d0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── NAVBAR WITH DROPDOWN ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 3rem;
+            background: rgba(13,13,15,0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-logo img {
+            height: 40px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-logo img:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0%;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* DROPDOWN MENU STYLES */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg2);
+            border: 1px solid var(--gold-border);
+            border-radius: 12px;
+            padding: 0.8rem 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .nav-links li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--gold-bg);
+            color: var(--gold);
+        }
+
+        .dropdown-menu a::after {
+            display: none;
+        }
+
+        .dropdown-toggle i {
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+
+        .nav-links li:hover .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--gold);
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            nav { padding: 1rem 1.5rem; }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: var(--bg2);
+                flex-direction: column;
+                width: 240px;
+                padding: 1rem;
+                border-radius: 12px;
+                border: 1px solid var(--gold-border);
+                display: none;
+                gap: 0.8rem;
+            }
+            .nav-links.show { display: flex; }
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                margin-top: 0.5rem;
+                margin-left: 1rem;
+                border: none;
+                padding-left: 0.5rem;
+                border-left: 2px solid var(--gold);
+            }
+            .nav-links li:hover .dropdown-menu { display: block; }
+            .dropdown-toggle i { display: none; }
+        }
+
+        /* ── HERO ── */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-bg video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+
+        .hero-bg .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(13,13,15,0.55) 0%, rgba(13,13,15,0.75) 60%, var(--bg) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 750px;
+            padding: 2rem;
+        }
+
+        .hero-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-name {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.0;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-name .last {
+            color: var(--gold);
+            display: block;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.8rem;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.25s;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #0d0d0f;
+        }
+        .btn-gold:hover { background: #ffc04a; transform: translateY(-2px); }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+        }
+        .btn-outline-gold:hover { background: var(--gold-bg); transform: translateY(-2px); }
+
+        .btn-outline-white {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            color: var(--text);
+        }
+        .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+
+        .hero-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.15);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .social-icon:hover { border-color: var(--gold); color: var(--gold); }
+
+        /* ── SECTIONS ── */
+        .section {
+            padding: 5rem 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            margin: 0 2rem;
+        }
+
+        .section-heading {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-heading .icon {
+            color: var(--gold);
+            font-size: 1.4rem;
+        }
+
+        .section-heading .accent { color: var(--gold); }
+
+        /* ── ABOUT ── */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-left { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .about-photo-wrap {
+            position: relative;
+            width: 200px;
+        }
+
+        .about-photo {
+            width: 200px;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+        }
+
+        .about-photo-dot {
+            position: absolute;
+            bottom: -10px; right: -10px;
+            width: 28px; height: 28px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+        }
+
+        .about-text { color: var(--text-dim); font-size: 0.95rem; line-height: 1.75; }
+
+        .quick-facts-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.8rem;
+        }
+
+        .quick-facts-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--text);
+        }
+
+        .fact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.88rem;
+        }
+        .fact-row:last-child { border-bottom: none; }
+        .fact-label { color: var(--text-muted); }
+        .fact-val { color: var(--text); font-weight: 500; text-align: right; }
+
+        /* ── EDUCATION TIMELINE ── */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.35rem; top: 1.2rem;
+            width: 14px; height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 3px var(--gold-border);
+        }
+
+        .edu-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem 1.8rem;
+        }
+
+        .edu-date {
+            font-size: 0.78rem;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .edu-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .edu-inst {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .edu-desc { font-size: 0.88rem; color: var(--text-dim); }
+
+        /* ── PROJECTS ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .project-card:hover { border-color: var(--gold-border); transform: translateY(-4px); }
+
+        .proj-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+
+        .proj-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+            line-height: 1.35;
+        }
+
+        .proj-desc { font-size: 0.86rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.6; }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+        .tech-tag {
+            background: rgba(245,166,35,0.15);
+            color: var(--gold);
+            border: 1px solid rgba(245,166,35,0.3);
+            font-size: 0.72rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        /* ── SKILLS ── */
+        .skills-top {
+            margin-bottom: 2.5rem;
+        }
+
+        .skills-sub-heading {
+            font-family: 'Sora', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+        .skills-sub-heading .icon { color: var(--gold); font-size: 0.95rem; }
+
+        .skills-bars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem 3rem;
+        }
+
+        .skill-row { display: flex; flex-direction: column; gap: 0.3rem; }
+
+        .skill-row-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.86rem;
+            color: var(--text-dim);
+        }
+
+        .skill-pct { color: var(--text-muted); }
+
+        .skill-track {
+            height: 5px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 99px;
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .cert-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .cert-dot {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── LEADERSHIP ── */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .lead-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.4rem;
+        }
+
+        .lead-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .lead-icon-wrap {
+            width: 40px; height: 40px;
+            background: var(--gold-bg);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .lead-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .lead-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lead-year { color: var(--gold); }
+        .lead-desc { font-size: 0.85rem; color: var(--text-dim); }
+
+        /* ── AWARDS ── */
+        .awards-list { display: flex; flex-direction: column; gap: 1rem; }
+
+        .award-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: border-color 0.2s;
+        }
+        .award-card:hover { border-color: var(--gold-border); }
+
+        .award-icon-wrap {
+            width: 44px; height: 44px;
+            background: var(--gold-bg);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .award-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .award-year {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .award-desc { font-size: 0.85rem; color: var(--text-dim); }
+
+        /* ── INTERESTS ── */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+        }
+
+        .interest-card {
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            position: relative;
+        }
+
+        .interest-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.6);
+            transition: filter 0.3s, transform 0.3s;
+        }
+        .interest-card:hover .interest-img { filter: brightness(0.8); transform: scale(1.04); }
+
+        .interest-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.2rem 1rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            font-family: 'Sora', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* ── BLOG ── */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .blog-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: border-color 0.25s;
+        }
+        .blog-card:hover { border-color: var(--gold-border); }
+
+        .blog-year { font-size: 0.8rem; color: var(--text-muted); }
+
+        .blog-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .blog-excerpt { font-size: 0.84rem; color: var(--text-dim); line-height: 1.6; }
+
+        .blog-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+        .blog-link:hover { gap: 0.5rem; }
+
+        /* ── REFERENCES ── */
+        .refs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .ref-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .ref-quote-icon {
+            position: absolute;
+            top: 1rem; right: 1.2rem;
+            font-size: 1.8rem;
+            color: rgba(245,166,35,0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .ref-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .ref-role { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.9rem; }
+        .ref-email { font-size: 0.82rem; color: var(--gold); }
+
+        /* ── CONTACT ── */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-intro { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 1.5rem; line-height: 1.7; }
+
+        .contact-info-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-size: 0.88rem;
+            color: var(--text-dim);
+        }
+
+        .contact-icon-box {
+            width: 36px; height: 36px;
+            background: var(--gold-bg);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+            resize: none;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder { color: var(--text-muted); }
+        .contact-form input:focus,
+        .contact-form textarea:focus { border-color: var(--gold-border); }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .footer-right { display: flex; align-items: center; gap: 1rem; }
+        .footer-logo { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--gold); font-size: 0.9rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            nav { padding: 1rem 1.5rem; }
+            .about-layout, .contact-layout { grid-template-columns: 1fr; }
+            .skills-bars-grid, .leadership-grid, .certs-grid { grid-template-columns: 1fr; }
+            .interests-grid { grid-template-columns: repeat(2, 1fr); }
+            .blog-grid, .refs-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-name { font-size: 2rem; }
+            .interests-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+
+        /* ── PORTFOLIO ADDITIONS: CHIPS, PROJECT SEARCH ── */
+        .section-kicker { color: var(--text-muted); margin-top: -1.8rem; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .profile-chips, .skill-chip-wrap { display:flex; flex-wrap:wrap; gap:0.55rem; margin-top:1rem; }
+        .chip { border:1px solid var(--card-border); color:var(--text-dim); background:rgba(255,255,255,0.03); padding:0.35rem 0.85rem; border-radius:999px; font-size:0.8rem; }
+    
+        .project-toolbar { display:flex; justify-content:space-between; gap:1rem; align-items:center; margin-bottom:1.2rem; flex-wrap:wrap; }
+        .project-toolbar label { color:var(--text-muted); font-size:0.9rem; }
+        .project-search { min-width:260px; background:var(--card); border:1px solid var(--card-border); border-radius:10px; padding:0.75rem 1rem; color:var(--text); outline:none; }
+        .project-search:focus { border-color:var(--gold-border); }
+        .project-card.featured { padding:0; overflow:hidden; }
+        .project-thumb { height:170px; background:linear-gradient(135deg, rgba(245,166,35,0.28), rgba(255,255,255,0.04)); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:2.8rem; border-bottom:1px solid var(--card-border); }
+        .project-content { padding:1.5rem; }
+        .project-learned { margin:0.8rem 0 1rem 1.1rem; color:var(--text-dim); font-size:0.84rem; }
+        .project-actions { margin-top:1rem; display:flex; gap:0.7rem; flex-wrap:wrap; }
+        .btn-small { padding:0.55rem 1rem; font-size:0.8rem; border-radius:8px; }
+        .skills-category-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1.5rem; }
+        .skill-category-card { background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:1.3rem; }
+        .skill-category-card h3 { font-family:'Sora',sans-serif; font-size:1rem; margin-bottom:0.7rem; }
+        .contact-links-card { background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:1.2rem; margin-top:1.2rem; display:flex; flex-direction:column; gap:0.75rem; }
+        .contact-links-card a { color:var(--text-dim); text-decoration:none; display:flex; align-items:center; gap:0.7rem; }
+        .contact-links-card a:hover { color:var(--gold); }
+        @media (max-width:900px){ .skills-category-grid { grid-template-columns:1fr; } .project-toolbar { align-items:flex-start; } }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR WITH DROPDOWN -->
+<nav>
+    <div class="nav-logo">
+        <img src="NMK logo.jpg" alt="Noliyolo Mamello Khotseng Logo">
+    </div>
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li class="dropdown">
+            <a href="#projects" class="dropdown-toggle">Projects <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#projects">UCLL - Harties Digital Insights</a></li>
+                <li><a href="#projects">Business Sales Analytics</a></li>
+                <li><a href="#projects">Akasia Library Database</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#skills" class="dropdown-toggle">Skills <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="#skills">Technical Skills</a></li>
+                <li><a href="#skills">Certifications</a></li>
+            </ul>
+        </li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#interests">Interests</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+    <div class="hero-bg">
+        <video autoplay muted loop playsinline>
+            <source src="Background_video.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-label">Welcome to my portfolio</div>
+        <h1 class="hero-name">
+            Noliyolo Mamello
+            <span class="last">Khotseng</span>
+        </h1>
+        <p class="hero-sub">Business Intelligence Student | Data &amp; Analytics Enthusiast | GradStar Top 100</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-gold">View Projects</a>
+            <a href="https://github.com/khotsengmamello-max/khotsengmamello-max.github.io/raw/main/Noliyolo%20Mamello%20Khotseng_CV%20.pdf" class="btn btn-outline-gold" download><i class="fas fa-download"></i> Download CV</a>
+            <a href="#contact" class="btn btn-outline-white">Get in Touch</a>
+        </div>
+        <div class="hero-socials">
+            <a href="https://www.linkedin.com/in/noliyolo-khotseng-318873233/" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/khotsengmamello-max" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-user"></i></span> About <span class="accent">Me</span></h2>
+    <div class="about-layout">
+        <div class="about-left">
+            <div class="about-photo-wrap">
+                <img class="about-photo" src="My professional photo.png" alt="Noliyolo Mamello Khotseng">
+                <div class="about-photo-dot"></div>
+            </div>
+            <p class="about-text">I am Noliyolo Mamello Khotseng — a 3rd-year Bachelor of Computing student at Belgium Campus iTversity, specialising in Business Intelligence and Data Science. With 19 distinctions and a 73.2% weighted average, I'm passionate about turning data into actionable insights.</p>
+            <p class="about-text">Recognised as a GradStar Top 100 in both 2023 and 2025, I'm currently contributing to an international project (UCLL) building a predictive analytics dashboard using Python, React, and data visualisation tools. I believe in the power of education, perseverance, and collaboration.</p>
+        </div>
+        <div class="quick-facts-card">
+            <h3>Quick Facts</h3>
+            <div class="fact-row"><span class="fact-label">Name</span><span class="fact-val">Noliyolo Mamello Khotseng</span></div>
+            <div class="fact-row"><span class="fact-label">Location</span><span class="fact-val">Tembisa, South Africa</span></div>
+            <div class="fact-row"><span class="fact-label">Focus</span><span class="fact-val">Business Intelligence &amp; Data Science</span></div>
+            <div class="fact-row"><span class="fact-label">Languages</span><span class="fact-val">English, isiXhosa</span></div>
+            <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val">khotsengmamello@gmail.com</span></div>
+        </div>
+    </div>
+
+    <div class="profile-chips">
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Power BI</span>
+        <span class="chip">HTML/CSS</span>
+        <span class="chip">Data Visualisation</span>
+        <span class="chip">Business Intelligence</span>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- EDUCATION -->
+<section id="education" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-graduation-cap"></i></span> <span class="accent">Education</span></h2>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="edu-card">
+                <div class="edu-date">2024 – Present</div>
+                <div class="edu-title">Bachelor of Computing (Integrated Honours: Data Science &amp; BI)</div>
+                <div class="edu-inst">Belgium Campus iTversity</div>
+                <div class="edu-desc">Completed 2 years of academic theory. 19 Distinctions with a 73.2% weighted average. Available for full-time Work-Integrated Learning (WIL) or junior roles.</div>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="edu-card">
+                <div class="edu-date">2022 – 2023</div>
+                <div class="edu-title">NTT Data Saturday School Program</div>
+                <div class="edu-inst">NTT Data</div>
+                <div class="edu-desc">Extra classes &amp; tech basic skills (Microsoft Word, Excel, etc.). Included YLED (Youth Leadership &amp; Entrepreneurship Development) training. Full scholarship awarded by NTT Data.</div>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="edu-card">
+                <div class="edu-date">2019 – 2023</div>
+                <div class="edu-title">National Higher Certificate</div>
+                <div class="edu-inst">Ingqayizivele High School</div>
+                <div class="edu-desc">Overall average: 79.25% with 6 distinctions in Mathematics, Life Orientation, Life Sciences, isiXhosa HL, English FAL, and Physical Science.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-folder-open"></i></span> <span class="accent">Projects</span></h2>
+    <p class="section-kicker">Selected work showcasing BI, SQL, dashboarding, and analytics skills.</p>
+    <div class="project-toolbar">
+        <label for="projectSearch">Filter by keyword, stack, or title</label>
+        <input id="projectSearch" class="project-search" type="search" placeholder="Search projects e.g., SQL, Python, Power BI">
+    </div>
+    <div class="projects-grid">
+        <div class="project-card featured" data-project="harties water quality python react data science dashboard analytics">
+            <div class="project-thumb"><i class="fas fa-water"></i></div>
+            <div class="project-content">
+                <div class="proj-category">Data Science</div>
+                <div class="proj-title">Harties Digital Insights — UCLL International Project</div>
+                <div class="proj-desc">Predictive analytics for water quality management. Built a Python model to analyse trends and support decision-making through interactive dashboards.</div>
+                <strong>What I did / learned</strong>
+                <ul class="project-learned">
+                    <li>Cleaned and prepared water-quality data for analysis.</li>
+                    <li>Built predictive logic and visual dashboards.</li>
+                    <li>Practised teamwork in an international project environment.</li>
+                </ul>
+                <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">React</span><span class="tech-tag">Data Analytics</span></div>
+                <div class="project-actions"><a href="#" class="btn btn-outline-gold btn-small">View Repository</a></div>
+            </div>
+        </div>
+        <div class="project-card featured" data-project="business sales performance analytics python pandas matplotlib power bi dashboard kpi">
+            <div class="project-thumb"><i class="fas fa-chart-column"></i></div>
+            <div class="project-content">
+                <div class="proj-category">Business Intelligence</div>
+                <div class="proj-title">Business Sales Performance Analytics</div>
+                <div class="proj-desc">Cleaned and analysed sales data, built an interactive Python + HTML dashboard with charts, and created Power BI KPI cards and slicers.</div>
+                <strong>What I did / learned</strong>
+                <ul class="project-learned">
+                    <li>Created KPI summaries for revenue, profit, category, and region.</li>
+                    <li>Designed clear charts for performance insights.</li>
+                    <li>Used dashboard storytelling to support business decisions.</li>
+                </ul>
+                <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">Matplotlib</span><span class="tech-tag">Power BI</span></div>
+                <div class="project-actions"><a href="#" class="btn btn-outline-gold btn-small">View Repository</a></div>
+            </div>
+        </div>
+        <div class="project-card featured" data-project="akasia library database sql server t-sql ssms erd stored procedures triggers views security">
+            <div class="project-thumb"><i class="fas fa-database"></i></div>
+            <div class="project-content">
+                <div class="proj-category">Database</div>
+                <div class="proj-title">Akasia Library Database System</div>
+                <div class="proj-desc">Designed and implemented a relational database for a community library with tables, views, stored procedures, triggers, and user security.</div>
+                <strong>What I did / learned</strong>
+                <ul class="project-learned">
+                    <li>Designed an ERD and relational tables for real workflows.</li>
+                    <li>Created stored procedures, triggers, and views.</li>
+                    <li>Applied security controls and backup thinking.</li>
+                </ul>
+                <div class="tech-tags"><span class="tech-tag">SQL Server</span><span class="tech-tag">T-SQL</span><span class="tech-tag">SSMS</span><span class="tech-tag">ERD</span></div>
+                <div class="project-actions"><a href="#" class="btn btn-outline-gold btn-small">View Repository</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-bolt"></i></span> <span class="accent">Skills</span></h2>
+
+    <div class="skills-top">
+        <div class="skills-sub-heading"><span class="icon"><i class="fas fa-code"></i></span> Technical Skills</div>
+        <div class="skills-bars-grid">
+            <div class="skill-row"><div class="skill-row-top"><span>Python</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>C# / JavaScript / HTML5</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>SQL (Microsoft SQL Server)</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>Excel &amp; Microsoft Access</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>Power BI</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>Git &amp; GitHub</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill" style="width:78%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>Cisco Packet Tracer</span><span class="skill-pct">70%</span></div><div class="skill-track"><div class="skill-fill" style="width:70%"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span>Figma &amp; Miro</span><span class="skill-pct">70%</span></div><div class="skill-track"><div class="skill-fill" style="width:70%"></div></div></div>
+        </div>
+    </div>
+
+    <div class="skills-category-grid">
+        <div class="skill-category-card">
+            <h3>Data Science</h3>
+            <div class="skill-chip-wrap"><span class="chip">Machine Learning</span><span class="chip">Data Cleaning</span><span class="chip">Statistical Analysis</span><span class="chip">Data Visualisation</span></div>
+        </div>
+        <div class="skill-category-card">
+            <h3>BI / Tools &amp; Platforms</h3>
+            <div class="skill-chip-wrap"><span class="chip">Power BI</span><span class="chip">Excel</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">VS Code</span></div>
+        </div>
+        <div class="skill-category-card">
+            <h3>Database Development</h3>
+            <div class="skill-chip-wrap"><span class="chip">ERD Design</span><span class="chip">T-SQL</span><span class="chip">Stored Procedures</span><span class="chip">Triggers</span><span class="chip">Oracle</span></div>
+        </div>
+        <div class="skill-category-card">
+            <h3>Other</h3>
+            <div class="skill-chip-wrap"><span class="chip">Operations Research</span><span class="chip">Linear Programming</span><span class="chip">Cloud Computing</span><span class="chip">Teamwork</span></div>
+        </div>
+    </div>
+
+
+    <div class="skills-sub-heading"><span class="icon"><i class="fas fa-chart-bar"></i></span> Certifications</div>
+    <div class="certs-grid">
+        <div class="cert-card"><div class="cert-dot"></div>Cisco Packet Tracer — Cisco Networking Academy</div>
+        <div class="cert-card"><div class="cert-dot"></div>Cybersecurity Essentials — Cisco Networking Academy</div>
+        <div class="cert-card"><div class="cert-dot"></div>IoT Fundamentals: Big Data &amp; Analytics — Cisco</div>
+        <div class="cert-card"><div class="cert-dot"></div>Machine Learning for Data Science — IBM (Credly verified)</div>
+        <div class="cert-card"><div class="cert-dot"></div>What Is Business Analysis — LinkedIn Learning</div>
+        <div class="cert-card"><div class="cert-dot"></div>Business Analysis Foundations — LinkedIn Learning</div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- LEADERSHIP -->
+<section id="leadership" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-shield-halved"></i></span> Leadership &amp; <span class="accent">Volunteering</span></h2>
+    <div class="leadership-grid">
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="lead-icon-wrap"><i class="fas fa-shield-halved"></i></div>
+                <div>
+                    <div class="lead-title">Deputy President — RCL</div>
+                    <div class="lead-meta"><span>Ingqayizivele High School</span><span class="lead-year">2022</span></div>
+                </div>
+            </div>
+            <div class="lead-desc">Represented the student body in school governance; organised student activities and promoted staff-student collaboration.</div>
+        </div>
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="lead-icon-wrap"><i class="fas fa-users"></i></div>
+                <div>
+                    <div class="lead-title">Peer Tutor</div>
+                    <div class="lead-meta"><span>Ingqayizivele High School</span><span class="lead-year">2022</span></div>
+                </div>
+            </div>
+            <div class="lead-desc">Provided academic support to peers, strengthening communication and mentoring skills.</div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- AWARDS -->
+<section id="awards" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-award"></i></span> Awards &amp; <span class="accent">Recognition</span></h2>
+    <div class="awards-list">
+        <div class="award-card">
+            <div class="award-icon-wrap"><i class="fas fa-award"></i></div>
+            <div>
+                <div class="award-title">GradStar Top 100 <span class="award-year">2023 &amp; 2025</span></div>
+                <div class="award-desc">Recognised among South Africa's Top 100 employable graduates — twice.</div>
+            </div>
+        </div>
+        <div class="award-card">
+            <div class="award-icon-wrap"><i class="fas fa-award"></i></div>
+            <div>
+                <div class="award-title">Top 1 Learner — Ingqayizivele High School <span class="award-year">2023</span></div>
+                <div class="award-desc">Recognised at Tembisa Matric Awards for achieving 6 distinctions and a 79.25% average.</div>
+            </div>
+        </div>
+        <div class="award-card">
+            <div class="award-icon-wrap"><i class="fas fa-award"></i></div>
+            <div>
+                <div class="award-title">NTT Data Full Scholarship <span class="award-year">2022</span></div>
+                <div class="award-desc">Awarded a full scholarship by NTT Data for the Saturday School Program, covering tech skills and leadership development.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- INTERESTS -->
+<section id="interests" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-heart"></i></span> Interests &amp; <span class="accent">Extracurricular</span></h2>
+    <div class="interests-grid">
+        <div class="interest-card">
+            <img class="interest-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80" alt="Technology">
+            <div class="interest-label">Technology &amp; Innovation</div>
+        </div>
+        <div class="interest-card">
+            <img class="interest-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80" alt="Hiking">
+            <div class="interest-label">Nature &amp; Hiking</div>
+        </div>
+        <div class="interest-card">
+            <img class="interest-img" src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=400&q=80" alt="Travelling">
+            <div class="interest-label">Travelling</div>
+        </div>
+        <div class="interest-card">
+            <img class="interest-img" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80" alt="Fitness">
+            <div class="interest-label">Fitness &amp; Discipline</div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- BLOG -->
+<section id="blog" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-book-open"></i></span> <span class="accent">Blog</span></h2>
+    <div class="blog-grid">
+        <div class="blog-card">
+            <div class="blog-year">2025</div>
+            <div class="blog-title">My Journey as a GradStar Top 100 — Twice</div>
+            <div class="blog-excerpt">Reflections on being recognised among South Africa's most employable graduates and what it means for my career in data science.</div>
+            <a href="#" class="blog-link">Read more →</a>
+        </div>
+        <div class="blog-card">
+            <div class="blog-year">2026</div>
+            <div class="blog-title">Building Predictive Models for Water Quality</div>
+            <div class="blog-excerpt">A deep dive into the UCLL international project where I built a predictive analytics dashboard using Python and React.</div>
+            <a href="#" class="blog-link">Read more →</a>
+        </div>
+        <div class="blog-card">
+            <div class="blog-year">2024</div>
+            <div class="blog-title">From Tembisa to Tech: My Path into Data Science</div>
+            <div class="blog-excerpt">How growing up in Tembisa, earning 6 matric distinctions, and a full NTT Data scholarship shaped my passion for technology.</div>
+            <a href="#" class="blog-link">Read more →</a>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- REFERENCES -->
+<section id="references" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-user-tie"></i></span> <span class="accent">References</span></h2>
+    <div class="refs-grid">
+        <div class="ref-card">
+            <div class="ref-quote-icon">❝❞</div>
+            <div class="ref-name">Mr. Francois Venter</div>
+            <div class="ref-role">Programme Coordinator (UCLL Supervisor) — Belgium Campus iTversity</div>
+            <div class="ref-email">venter.f@belgiumcampus.ac.za</div>
+        </div>
+        <div class="ref-card">
+            <div class="ref-quote-icon">❝❞</div>
+            <div class="ref-name">Lethlabile L. Selamolela</div>
+            <div class="ref-role">Counsellor — Belgium Campus iTversity</div>
+            <div class="ref-email">selamolela.l@belgiumcampus.ac.za</div>
+        </div>
+        <div class="ref-card">
+            <div class="ref-quote-icon">❝❞</div>
+            <div class="ref-name">Mrs. Mothiba</div>
+            <div class="ref-role">Deputy Principal — Ingqayizivele High School</div>
+            <div class="ref-email">Available on request</div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+    <h2 class="section-heading"><span class="icon"><i class="fas fa-envelope"></i></span> Get in <span class="accent">Touch</span></h2>
+    <div class="contact-layout">
+        <div>
+            <p class="contact-intro">I'd love to hear from you — whether it's an internship opportunity, a data project, or just a conversation about BI and analytics. Feel free to reach out!</p>
+            <div class="contact-info-list">
+                <div class="contact-info-item"><div class="contact-icon-box"><i class="fas fa-envelope"></i></div> khotsengmamello@gmail.com</div>
+                <div class="contact-info-item"><div class="contact-icon-box"><i class="fas fa-phone"></i></div> 071 555 1015</div>
+                <div class="contact-info-item"><div class="contact-icon-box"><i class="fas fa-location-dot"></i></div> Tembisa, 1632, South Africa</div>
+            </div>
+
+            <div class="contact-links-card">
+                <a href="mailto:khotsengmamello@gmail.com"><i class="fas fa-envelope"></i> Email me</a>
+                <a href="https://www.linkedin.com/in/noliyolo-khotseng-318873233/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/khotsengmamello-max" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://github.com/khotsengmamello-max/khotsengmamello-max.github.io/raw/main/Noliyolo%20Mamello%20Khotseng_CV%20.pdf"><i class="fas fa-download"></i> Download Résumé (PDF)</a>
+            </div>
+        </div>
+        <form class="contact-form" action="https://formspree.io/f/mqeodqaw" method="POST">
+    
+    <input type="text" name="name" placeholder="Your Name" required>
+
+    <input type="email" name="email" placeholder="Your Email" required>
+
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+    <button type="submit" class="btn btn-gold" style="align-self:flex-start;border:none;font-size:0.9rem;">
+        <i class="fas fa-paper-plane"></i> Send Message
+    </button>
+
+</form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Noliyolo Mamello Khotseng. All rights reserved.</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/noliyolo-khotseng-318873233/" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/khotsengmamello-max" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
+        <span class="footer-logo">NMK</span>
+    </div>
+</footer>
+
+<script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 120) current = s.id;
+        });
+
+        navLinks.forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === '#' + current) {
+                a.classList.add('active');
+            }
+        });
+    });
+
+    // DROPDOWN MENU TOGGLE FOR MOBILE
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navMenu = document.querySelector(".nav-links");
+
+    if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+            navMenu.classList.toggle("show");
+        });
+    }
+
+    // CLOSE MENU WHEN CLICKING A LINK
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("show");
+        });
+    });
+
+
+    // PROJECT SEARCH FILTER
+    const projectSearch = document.getElementById('projectSearch');
+    const projectCards = document.querySelectorAll('.project-card');
+    if (projectSearch) {
+        projectSearch.addEventListener('input', () => {
+            const term = projectSearch.value.toLowerCase().trim();
+            projectCards.forEach(card => {
+                const text = (card.dataset.project + ' ' + card.innerText).toLowerCase();
+                card.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+    }
+
+</script>
+</body>
+</html>
